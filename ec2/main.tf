@@ -1,8 +1,3 @@
-# Configure the AWS provider
-provider "aws" {
-  region = "us-east-1" # Specify your AWS region
-}
-
 # Define an AWS security group
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh"
@@ -25,11 +20,11 @@ resource "aws_security_group" "allow_ssh" {
 
 # Define an EC2 instance
 resource "aws_instance" "example" {
-  ami           = "ami-0866a3c8686eaeeba" # Replace with a valid AMI ID for your region
-  instance_type = "t2.micro"              # Define the EC2 instance type
+  ami           = var.ami_id
+  instance_type = var.instance_type           
 
   # Optional: Assign a key pair for SSH access
-  key_name = "s77" # Replace with your SSH key name
+  key_name = var.key_name
 
   # Optional: Set the instance tags
   tags = {
