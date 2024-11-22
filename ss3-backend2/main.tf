@@ -1,4 +1,7 @@
 
+
+
+
 resource "aws_dynamodb_table" "terraform_lock" {
   name         = "terraform-lock-table" # DynamoDB table for locking
   billing_mode = "PAY_PER_REQUEST"      # Automatically scales capacity

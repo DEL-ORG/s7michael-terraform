@@ -26,3 +26,4 @@ resource "aws_iam_policy" "michael-bucket02_policy" {
     ]
   })
 }
+
