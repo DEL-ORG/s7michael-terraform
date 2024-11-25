@@ -18,8 +18,6 @@ _site/
 Gemfile.lock
 
 # Local .terraform directories
-**/.terraform/
-*/.terraform/
 */.terraform/
 .terraform.lock.hcl
 
@@ -58,4 +56,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-.terraform.tfstate.backup
+terraform.tfstate.backup
