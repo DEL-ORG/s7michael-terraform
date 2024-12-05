@@ -5,12 +5,22 @@ data "aws_vpc" "selected_vpc" {
   }
 }
 
-data "aws_ami" "ec2_ami" {
+data "aws_ami" "ubuntu_ami" {
   most_recent = false
 
   filter {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-20240927"]
+
+  }
+}
+
+data "aws_ami" "amazon_ami" {
+  most_recent = false
+
+  filter {
+    name   = "name"
+    values = ["al2023-ami-2023.6.20241121.0-kernel-6.1-x86_64"]
 
   }
 }
@@ -22,13 +32,21 @@ data "aws_subnet" "subnet-01" {
   }
 }
 
-data "aws_security_group" "ec2_sg" {
+data "aws_security_group" "sg" {
   filter {
     name   = "tag:Name"
-    values = ["ec2_sg"]
+    values = ["dev-alpha-sg"]
   }
 }
 
+data "aws_key_pair" "key_pair" {
+  # key_name           = "test"
+  # include_public_key = true
+  filter {
+    name   = "tag:Name"
+    values = ["s77"]
+  }
+}
 
 
 

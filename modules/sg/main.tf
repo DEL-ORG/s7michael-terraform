@@ -1,5 +1,5 @@
 resource "aws_security_group" "ec2_sg" {
-  name        = "ec2_sg"
+  name        = var.aws_security_group
   description = "Allow HTTP and SSH traffic"
   vpc_id      = ""
 
@@ -19,6 +19,14 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "Allow HTTP traffic"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     description = "Allow all outbound traffic"
     from_port   = 0
@@ -27,11 +35,8 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name        = "ec2_sg"
-    owner       = "DEL"
-    environment = "dev"
-    project     = "alpha"
-    created_by  = "Terraform"
-  }
+
+  tags = merge(var.tags, {
+    Name = format("%s-%s-%s", var.tags["environment"], var.tags["project"], var.resource_name)
+  })
 }
