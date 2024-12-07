@@ -1,22 +1,47 @@
 variable "region" {
-  description = "AWS region to create resources in"
-  type        = string
-  default     = "us-east-1"
-}
-
-variable "bucket_name" {
-  description = "The name of the S3 bucket for storing Terraform state"
+  description = "AWS region to deploy resources"
   type        = string
 }
 
-variable "dynamodb_table_name" {
-  description = "The name of the DynamoDB table for state locking"
+variable "source_bucket" {
+  description = "Name of the primary S3 bucket"
   type        = string
-  default     = "terraform-state-lock"
 }
 
-variable "environment" {
-  description = "Environment for the resources, e.g., dev, prod"
+variable "replica_bucket" {
+  description = "Name of the replica S3 bucket"
   type        = string
-  default     = "dev"
+}
+
+variable "replication_role" {
+  description = "Name of iam role for replication"
+  type        = string
+}
+
+variable "replication_policy" {
+  description = "Name of iam policy for replication"
+  type        = string
+  default     = "replication_policy"
+}
+
+variable "terraform_state_role" {
+  type        = string
+}
+
+variable "terraform_state_policy" {
+  type        = string
+}
+
+variable "state_lock_table" {
+  type        = string
+}
+
+variable "tags" {
+  type        = map(string)
+}
+
+variable "prevent_destroy" {
+  description = "Prevent bucket destruction"
+  type        = bool
+  default     = true
 }
