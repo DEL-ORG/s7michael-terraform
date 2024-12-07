@@ -1,11 +1,10 @@
 variable "aws_security_group" {
   type    = string
-  default = ""
 }
 
-# variable "cidr_blocks" {
-#   type = string
-# }
+variable "ingress_ports" {
+  type    = list(number)
+}
 
 variable "tags" {
   type = map(string)
